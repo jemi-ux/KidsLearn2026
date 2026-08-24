@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}KidsLearn — Tableau parent{% endblock %}
+{% block content %}
+<div class="dashboard-head">
+  <div><span class="tag">PARENT DASHBOARD</span><h1>{{ "Bonjour" if current_lang=="fr" else "Hello" }}, {{ user.name }} 👋</h1><p class="muted">{{ "Voici les progrès de vos enfants." if current_lang=="fr" else "Here is your children's progress." }}</p></div>
+  <a class="btn purple" href="{{ url_for('register_child') }}">+ {{ "Ajouter un enfant" if current_lang=="fr" else "Add child" }}</a>
+</div>
+<section class="kpis">
+  <div class="card kpi"><small>{{ "Enfants" if current_lang=="fr" else "Children" }}</small><strong>{{ summary.children }}</strong></div>
+  <div class="card kpi"><small>{{ "Activités terminées" if current_lang=="fr" else "Completed activities" }}</small><strong>{{ summary.activities }}</strong></div>
+  <div class="card kpi"><small>{{ "Score moyen" if current_lang=="fr" else "Average score" }}</small><strong>{{ summary.average }}%</strong></div>
+</section>
+<div class="section-title"><h2>{{ "Mes enfants" if current_lang=="fr" else "My children" }}</h2><a class="btn alt" href="{{ url_for("library") }}">📚 {{ "Bibliothèque" if current_lang=="fr" else "Library" }}</a></div>
+{% if children %}
+<section class="grid-2">
+{% for child in children %}
+  <div class="card">
+    <div class="child-row">
+      <div class="avatar">🧒</div><div class="child-meta"><h3>{{ child.name }}</h3><p>{{ child.age }} ans · {{ child.level }}</p></div>
+      <a class="btn alt" href="{{ url_for('child_dashboard', child_id=child.id) }}">→</a>
+    </div>
+    <div style="margin-top:20px;display:flex;justify-content:space-between"><b>{{ "Progression" if current_lang=="fr" else "Progress" }}</b><b>{{ child.progress }}%</b></div>
+    <div class="progress" style="margin-top:8px"><span data-progress="{{ child.progress }}"></span></div>
+    <p class="muted" style="font-size:13px">{{ child.completed }} {{ "activité(s) évaluée(s)" if current_lang=="fr" else "assessed activit(y/ies)" }}</p>
+  </div>
+{% endfor %}
+</section>
+{% else %}
+<div class="card empty">{{ "Ajoutez le premier profil enfant pour commencer." if current_lang=="fr" else "Add your first child profile to get started." }}</div>
+{% endif %}
+{% endblock %}

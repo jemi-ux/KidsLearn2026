@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}KidsLearn — Compte parent{% endblock %}
+{% block content %}
+<div class="auth"><div class="card">
+  <div class="page-head"><h1>{{ "Compte parent" if current_lang=="fr" else "Parent account" }}</h1><p class="muted">{{ "Créez votre espace pour suivre les apprentissages." if current_lang=="fr" else "Create your space to follow learning progress." }}</p></div>
+  <form method="post">
+    <div class="form-row"><label>{{ "Nom" if current_lang=="fr" else "Name" }}</label><input name="name" required></div>
+    <div class="form-row"><label>E-mail</label><input type="email" name="email" required></div>
+    <div class="form-row"><label>{{ "Mot de passe" if current_lang=="fr" else "Password" }}</label><input type="password" name="password" minlength="6" required></div>
+    <button class="btn purple" type="submit">{{ "Créer mon compte" if current_lang=="fr" else "Create my account" }} →</button>
+  </form>
+</div></div>
+{% endblock %}

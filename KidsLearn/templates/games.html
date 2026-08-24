@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}KidsLearn — Jeux{% endblock %}
+{% block content %}
+<div class="page-head"><span class="tag">🎮 KIDSLEARN GAMES</span><h1>{{ "Apprendre en jouant" if current_lang=="fr" else "Learn through play" }}</h1><p class="muted">{{ "Choisis un jeu et relève le défi !" if current_lang=="fr" else "Choose a game and take the challenge!" }}</p></div>
+<div class="games-tabs" data-games-tabs>
+  <button class="btn purple game-tab active" data-game="letters">🔤 {{ "Chasse aux lettres" if current_lang=="fr" else "Letter hunt" }}</button>
+  <button class="btn alt game-tab" data-game="syllables">🧩 {{ "Puzzle de syllabes" if current_lang=="fr" else "Syllable puzzle" }}</button>
+  <button class="btn alt game-tab" data-game="duo">🌍 {{ "Duo FR / EN" if current_lang=="fr" else "FR / EN Duo" }}</button>
+  <button class="btn alt game-tab" data-game="avatar">🧑‍🚀 {{ "Aventure Avatar" if current_lang=="fr" else "Avatar Adventure" }}</button>
+</div>
+<div class="card game-area" data-game-area data-lang="{{ current_lang }}"></div>
+{% endblock %}

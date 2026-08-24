@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}KidsLearn — Admin{% endblock %}
+{% block content %}
+<div class="page-head"><span class="tag">🛠️ ADMIN</span><h1>{{ "Pilotage KidsLearn" if current_lang=="fr" else "KidsLearn administration" }}</h1><p class="muted">{{ "Vue globale de la plateforme." if current_lang=="fr" else "Global platform overview." }}</p></div>
+<div class="admin-grid">
+{% for label,value in [
+("Parents",summary.parents),("Enfants",summary.children),("Histoires",summary.stories),
+("Évaluations",summary.assessments),("Score moyen",summary.average|string+"%")
+] %}
+<div class="card kpi"><small>{{ label }}</small><strong>{{ value }}</strong></div>{% endfor %}
+</div>
+<div class="section-title"><h2>📋 {{ "Dernières évaluations" if current_lang=="fr" else "Recent assessments" }}</h2></div>
+<div class="card">
+{% for r in recent %}<div class="child-row" style="padding:12px 0;border-bottom:1px solid #eee"><div class="avatar">📝</div><div class="child-meta"><h3>{{ r.child_name }}</h3><p>{{ r.story }} · {{ r.created_at }}</p></div><b>{{ r.percentage }}%</b></div>
+{% else %}<p class="muted">Aucune évaluation.</p>{% endfor %}
+</div>
+{% endblock %}

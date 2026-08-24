@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}KidsLearn — {{ child.name }}{% endblock %}
+{% block content %}
+<div class="dashboard-head">
+  <div><span class="tag">{{ child.level }}</span><h1>{{ "Salut" if current_lang=="fr" else "Hi" }}, {{ child.name }}! 🌟</h1>
+  <p class="muted">{{ "Une nouvelle aventure de lecture t'attend." if current_lang=="fr" else "A new reading adventure is waiting for you." }}</p></div>
+  <div class="avatar">{{ child.avatar }}</div>
+</div>
+{% include "ai_widget.html" %}
+
+<section class="kpis">
+  <div class="card kpi"><small>{{ "Activités" if current_lang=="fr" else "Activities" }}</small><strong>{{ progress|length }}</strong></div>
+  <div class="card kpi"><small>{{ "Score moyen" if current_lang=="fr" else "Average score" }}</small><strong>{{ (progress|map(attribute='percentage')|list|sum // (progress|length or 1)) }}%</strong></div>
+  <div class="card kpi"><small>{{ "Badges" if current_lang=="fr" else "Badges" }}</small><strong>{{ badges|length }} 🏅</strong></div>
+</section>
+
+<div class="section-title"><h2>📖 {{ "Ma bibliothèque d’histoires" if current_lang=="fr" else "My story library" }}</h2><a class="btn alt" href="{{ url_for('library', level=child.level) }}">📚 {{ "Ouvrir toute la bibliothèque" if current_lang=="fr" else "Open full library" }}</a></div>
+<section class="grid">
+{% for s in stories %}
+<article class="card story-card"><div class="story-cover">{{ s.emoji }}</div><span class="tag">{{ s.category }} · {{ s.minutes }} min</span>
+<h3>{{ s.title_fr if current_lang=="fr" else s.title_en }}</h3><p>{{ (s.text_fr if current_lang=="fr" else s.text_en)[:115] }}…</p>
+<a class="btn purple" href="{{ url_for('story',story_id=s.id) }}">{{ "Lire & jouer" if current_lang=="fr" else "Read & play" }} →</a></article>
+{% endfor %}
+</section>
+
+<div class="section-title"><h2>🧠 {{ "Compétences" if current_lang=="fr" else "Skills" }}</h2></div>
+<div class="card">
+{% if skills %}{% for s in skills %}<div class="skill"><div class="skill-top"><b>{{ s.skill }}</b><span>{{ s.score }}%</span></div><div class="progress"><span data-progress="{{ s.score }}"></span></div></div>{% endfor %}
+{% else %}<p class="muted">{{ "Termine une première activité pour voir tes compétences." if current_lang=="fr" else "Complete your first activity to see your skills." }}</p>{% endif %}
+</div>
+
+<div class="section-title"><h2>🏅 {{ "Mes badges" if current_lang=="fr" else "My badges" }}</h2><a class="btn alt" href="{{ url_for('games') }}">🎮 {{ "Jouer" if current_lang=="fr" else "Play" }}</a></div>
+<div class="badges">
+{% for b in badges %}<div class="badge"><div class="icon">{{ b.icon }}</div><b>{{ b.name_fr if current_lang=="fr" else b.name_en }}</b><small>{{ b.description_fr if current_lang=="fr" else b.description_en }}</small></div>{% endfor %}
+{% if not badges %}<p class="muted">{{ "Ton premier badge arrive après ta première histoire !" if current_lang=="fr" else "Your first badge arrives after your first story!" }}</p>{% endif %}
+</div>
+
+{% if progress %}
+<div class="section-title"><h2>📈 {{ "Mes résultats" if current_lang=="fr" else "My results" }}</h2></div>
+<div class="card">
+<div class="chart">{% for r in progress[:8]|reverse %}<div class="bar" style="height:{{ [r.percentage,10]|max }}%"><small>{{ r.percentage }}%</small></div>{% endfor %}</div>
+</div>
+{% endif %}
+{% endblock %}

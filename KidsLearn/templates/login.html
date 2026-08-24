@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}KidsLearn — Connexion{% endblock %}
+{% block content %}
+<div class="auth"><div class="card">
+  <div class="page-head"><h1>👋 {{ "Bonjour !" if current_lang=="fr" else "Hello!" }}</h1><p class="muted">{{ "Connectez-vous à KidsLearn." if current_lang=="fr" else "Log in to KidsLearn." }}</p></div>
+  <form method="post">
+    <div class="form-row"><label>E-mail</label><input type="email" name="email" required></div>
+    <div class="form-row"><label>{{ "Mot de passe" if current_lang=="fr" else "Password" }}</label><input type="password" name="password" required></div>
+    <button class="btn purple" type="submit">{{ "Se connecter" if current_lang=="fr" else "Log in" }} →</button>
+  </form>
+  <div class="card" style="margin-top:16px;background:#faf7ff">
+    <strong>🛠️ Administrateur</strong>
+    <p class="muted" style="margin:6px 0 0">Pour accéder au Dashboard admin, utilisez le compte administrateur du prototype puis ouvrez <code>/admin</code>.</p>
+  </div>
+</div></div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}KidsLearn — Ajouter un enfant{% endblock %}
+{% block content %}
+<div class="auth"><div class="card">
+  <div class="page-head"><h1>👧 {{ "Ajouter un enfant" if current_lang=="fr" else "Add a child" }}</h1></div>
+  <form method="post">
+    <div class="form-row"><label>{{ "Prénom" if current_lang=="fr" else "First name" }}</label><input name="name" required></div>
+    <div class="form-row"><label>{{ "Âge" if current_lang=="fr" else "Age" }}</label><input type="number" name="age" min="3" max="15" required></div>
+    <div class="form-row"><label>{{ "Niveau" if current_lang=="fr" else "Level" }}</label><select name="level"><option>Débutant</option><option>Intermédiaire</option><option>Avancé</option></select></div>
+    <button class="btn purple" type="submit">{{ "Ajouter le profil" if current_lang=="fr" else "Add profile" }}</button>
+  </form>
+</div></div>
+{% endblock %}

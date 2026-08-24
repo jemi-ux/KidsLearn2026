@@ -1,0 +1,14 @@
+<div class="card ai-card" id="kidslearn-ai" data-ai-widget>
+  <div class="ai-head"><div class="ai-avatar">🤖</div><div><span class="tag">✨ MINI IA</span><h2>{{ "Mon petit assistant KidsLearn" if current_lang=="fr" else "My KidsLearn assistant" }}</h2></div></div>
+  <p id="ai-message">{{ "Coucou ! Quel est ton niveau d'âge ?" if current_lang=="fr" else "Hi! Which age level are you in?" }}</p>
+  <div class="ai-step" data-ai-level>
+    <button type="button" class="ai-choice" data-level="Niveau 1 (3-5 ans)">🌱 {{ "Niveau 1 · 3–5 ans" if current_lang=="fr" else "Level 1 · 3–5 years" }}</button>
+    <button type="button" class="ai-choice" data-level="Niveau 2 (6-8 ans)">📚 {{ "Niveau 2 · 6–8 ans" if current_lang=="fr" else "Level 2 · 6–8 years" }}</button>
+    <button type="button" class="ai-choice" data-level="Niveau 3 (9-10 ans)">🚀 {{ "Niveau 3 · 9–10 ans" if current_lang=="fr" else "Level 3 · 9–10 years" }}</button>
+  </div>
+  <div class="ai-step hidden" data-ai-feedback>
+    <button type="button" class="ai-choice" data-liked="yes">😍 {{ "Oui, j'adore !" if current_lang=="fr" else "Yes, I love it!" }}</button>
+    <button type="button" class="ai-choice" data-liked="some">🙂 {{ "Un peu" if current_lang=="fr" else "A little" }}</button>
+    <button type="button" class="ai-choice" data-liked="no">💡 {{ "Pas encore" if current_lang=="fr" else "Not yet" }}</button>
+  </div>
+</div>

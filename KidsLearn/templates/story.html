@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}KidsLearn — {{ story.title_fr }}{% endblock %}
+{% block content %}
+<div class="story-page">
+<div class="page-head"><span class="tag">{{ story.emoji }} {{ story.level }} · {{ story.minutes }} min</span><h1>{{ story.title_fr if current_lang=="fr" else story.title_en }}</h1><p class="muted">{{ story.category }}</p></div>
+<div class="card">
+<div class="story-cover">{{ story.emoji }}</div>
+<div class="speech-controls">
+<button class="small-btn" data-speak="{{ story.text_fr }}" data-lang="fr">🔊 Lire en français</button>
+<button class="small-btn" data-speak="{{ story.text_en }}" data-lang="en">🔊 Read in English</button>
+<button class="small-btn" onclick="speechSynthesis.cancel()">⏹ Stop</button>
+</div>
+<div class="story-text">{{ story.text_fr if current_lang=="fr" else story.text_en }}</div>
+</div>
+<div class="section-title"><h2>🎯 {{ "Défi de compréhension" if current_lang=="fr" else "Comprehension challenge" }}</h2></div>
+<form method="post" action="{{ url_for('assessment',story_id=story.id) }}">
+{% if user and user.role=="parent" %}<div class="form-row"><label>{{ "ID de l'enfant" if current_lang=="fr" else "Child ID" }}</label><input type="number" name="child_id" required></div>
+{% elif user and user.role=="child" %}<input type="hidden" name="child_id" value="{{ user.user_id }}">{% endif %}
+{% for q in questions %}
+<div class="card question"><h3>{{ loop.index }}. {{ q.prompt_fr if current_lang=="fr" else q.prompt_en }}</h3>
+<label class="option"><input type="radio" name="q_{{ q.id }}" value="A" required> {{ q.option_a_fr if current_lang=="fr" else q.option_a_en }}</label>
+<label class="option"><input type="radio" name="q_{{ q.id }}" value="B"> {{ q.option_b_fr if current_lang=="fr" else q.option_b_en }}</label>
+<label class="option"><input type="radio" name="q_{{ q.id }}" value="C"> {{ q.option_c_fr if current_lang=="fr" else q.option_c_en }}</label></div>
+{% endfor %}
+<div class="actions"><button class="btn purple">{{ "Valider mon défi" if current_lang=="fr" else "Submit challenge" }} ✨</button></div>
+</form>
+</div>
+{% endblock %}

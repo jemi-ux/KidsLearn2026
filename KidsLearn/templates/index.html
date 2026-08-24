@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}KidsLearn — Apprendre en s'amusant{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <span class="tag">FR 🇫🇷 · EN 🇬🇧</span>
+    <h1>{{ "Commençons ton aventure de lecture" if current_lang=="fr" else "Start Your Reading Adventure" }}</h1>
+    <p>{{ "KidsLearn transforme la lecture et l’alphabétisation en une aventure interactive : histoires par niveaux, jeux de compréhension, évaluations et suivi parent." if current_lang=="fr" else "KidsLearn turns reading and literacy into an interactive adventure with leveled stories, playful comprehension games, assessments and parent progress tracking." }}</p>
+    <div class="actions">
+      <a class="btn purple" href="{{ url_for('register_parent') }}">{{ "Créer un compte parent" if current_lang=="fr" else "Create parent account" }} →</a>
+      <a class="btn alt" href="{{ url_for('library') }}">{{ "Explorer les histoires" if current_lang=="fr" else "Explore stories" }}</a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="bubble one">A + B = 📖</div>
+    <div class="bubble two">Great! ⭐</div>
+    <div class="book-stack">📚</div>
+    <div class="hero-character">👧🏽</div>
+  </div>
+</section>
+
+<div class="section-title"><h2>{{ "Tout pour apprendre à lire" if current_lang=="fr" else "Everything for learning to read" }}</h2></div>
+<section class="grid">
+  <div class="card"><div class="story-cover">📖</div><h3>{{ "Histoires par niveaux" if current_lang=="fr" else "Leveled stories" }}</h3><p>{{ "Du premier mot aux textes plus riches, chaque enfant avance à son rythme." if current_lang=="fr" else "From first words to richer texts, children progress at their own pace." }}</p></div>
+  <div class="card"><div class="story-cover">🎮</div><h3>{{ "Compréhension ludique" if current_lang=="fr" else "Playful comprehension" }}</h3><p>{{ "Questions, choix multiples et petits défis après chaque histoire." if current_lang=="fr" else "Questions, multiple choice and mini challenges after every story." }}</p></div>
+  <div class="card"><div class="story-cover">📈</div><h3>{{ "Suivi parent" if current_lang=="fr" else "Parent tracking" }}</h3><p>{{ "Le parent visualise les activités, les scores et la progression de chaque enfant." if current_lang=="fr" else "Parents can see activities, scores and progress for each child." }}</p></div>
+</section>
+{% endblock %}

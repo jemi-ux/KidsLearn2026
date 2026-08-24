@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}KidsLearn — Résultat{% endblock %}
+{% block content %}
+<div class="result">
+  <div class="card">
+    <div style="font-size:65px">🏆</div>
+    <p class="muted">{{ "Défi terminé !" if current_lang=="fr" else "Challenge complete!" }}</p>
+    <div class="score">{{ percentage }}%</div>
+    <h1>{{ score }}/{{ total }} {{ "bonnes réponses" if current_lang=="fr" else "correct answers" }}</h1>
+    <p class="muted">{{ "Chaque lecture est une petite victoire. Continue !" if current_lang=="fr" else "Every reading session is a small victory. Keep going!" }}</p>
+    <div class="actions" style="justify-content:center">
+      {% if child_id %}<a class="btn purple" href="{{ url_for('child_dashboard', child_id=child_id) }}">{{ "Retour au tableau de bord" if current_lang=="fr" else "Back to dashboard" }}</a>{% endif %}
+      <a class="btn alt" href="{{ url_for('library') }}">{{ "Lire une autre histoire" if current_lang=="fr" else "Read another story" }}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
